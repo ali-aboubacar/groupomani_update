@@ -1,0 +1,31 @@
+.home-section{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:15vh;
+  }
+.post-component{
+    width:65%;
+    height:150px;
+    margin-bottom:2%;
+    margin-right: 10px;
+    border:2px solid #FFD7D7;
+}
+.post-component span{
+    width:40%;
+    height:50px;
+}
+.post-img-input{
+    display:flex;
+    justify-content:center;
+}
+.post-img-input img{
+    height:80px;
+    border-radius:50%;
+}
+.post-img-input input{
+    height:45px;
+    width:75%;
+    background-color:#8186a0;
+    border-radius:30px;
+    margin:3%;
+}

@@ -1,0 +1,8 @@
+.sidebar-component{
+    display: flex;
+    position:fixed;
+    width:30%;
+    height:71vh;
+    left:0;
+    background-color:#8186a0;
+}

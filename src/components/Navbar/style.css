@@ -1,0 +1,17 @@
+.navbar-component{
+    display: flex;
+    justify-content: center;
+}
+.navbar-component header{
+    display: flex;
+    height:13vh;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    position:fixed;
+    top:0;
+    background-color:#ffff;
+}
+.navbar-component img{
+    height: 200px;
+}
