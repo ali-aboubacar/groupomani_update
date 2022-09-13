@@ -7,6 +7,7 @@ const fs = require("fs");
 exports.createPost = (req, res, next) => {
   // delete postObject._id;
   // delete postObject._userId;
+  console.log('#######',req.file);
   const post = req.file
     ? {
         ...req.body,

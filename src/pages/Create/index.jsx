@@ -1,6 +1,7 @@
 import './style.css'
 import {useState, useEffect} from 'react'
 import Sidebar from '../../components/Sidebar'
+import axios from 'axios'
 
 function Sendpost() {
   const [imageFile, setImageFile] = useState(null);
@@ -27,22 +28,17 @@ const imageChanged = e => {
     formDataToSend.append('title', dataToSend.title);
     formDataToSend.append('content', dataToSend.content);
     formDataToSend.append('file', imageFile);
-    e.target.reset();
+    // e.target.reset();
 
-    const reqOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'multipart/form-data' },
-      body: formDataToSend,
-  };
-    const req = await fetch('http://localhost:4000/api/posts', reqOptions);
-    const res  = await req.json();
-    setDataToSend(res);
+
+    const req = await axios.post('http://localhost:4000/api/posts', formDataToSend);
+    console.log(req);
   }
 
-  useEffect(() => {
-    // POST request using fetch inside useEffect React hook
-    submitData();
-});
+//   useEffect(() => {
+//     // POST request using fetch inside useEffect React hook
+//     submitData();
+// });
   return (
     <section className="home-section">
     <Sidebar/>
