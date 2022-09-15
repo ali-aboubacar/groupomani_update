@@ -1,5 +1,5 @@
 import './style.css'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import Sidebar from '../../components/Sidebar'
 import axios from 'axios'
 
@@ -19,7 +19,7 @@ function Sendpost() {
 }
 
 const imageChanged = e => {
-  setImageFile(e.target.file[0]);
+  setImageFile(e.target.files[0]);
 }
 
   const submitData = async (e) => {
@@ -29,21 +29,19 @@ const imageChanged = e => {
     formDataToSend.append('content', dataToSend.content);
     formDataToSend.append('file', imageFile);
     // e.target.reset();
-
-
-    const req = await axios.post('http://localhost:4000/api/posts', formDataToSend);
-    console.log(req);
+    const config = {     
+      headers: { 'content-type': 'multipart/form-data' }
   }
 
-//   useEffect(() => {
-//     // POST request using fetch inside useEffect React hook
-//     submitData();
-// });
+    const req = await axios.post("http://localhost:4000/api/posts", formDataToSend, config);
+    console.log(req);
+  }
+  
   return (
     <section className="home-section">
     <Sidebar/>
-    <div className="card text-center m-3">
-            <form onSubmit={submitData}>
+    <div className="post-component">
+            <form encType="multipart/form"  onSubmit={submitData}>
             <input name="title" type="text" placeholder='post title' onChange={formDataFieldChanged}/>
             <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content"></textarea>
             <input name="imageFile" type="file" onChange={imageChanged}/>

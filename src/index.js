@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Create from './pages/Create';
+import Post from './pages/Post';
 import { BrowserRouter,Routes,Route} from "react-router-dom"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,6 +15,7 @@ root.render(
   <Navbar/>
         <Routes>
         <Route path="/" element={ <Home/> } />
+        <Route path="/post/:id" element={ <Post/> } />
         <Route path="/create" element={ <Create/> } />
         <Route path="/profile" element={ <Profile/> } />
       </Routes>
