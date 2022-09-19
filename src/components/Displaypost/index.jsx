@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 // import {Route} from "react-router-dom"
 // import DisplayPic from '../../assets/user-profile.png'
 
-
+ 
 function Displaypost() {
   const [posts, setPosts] = useState([]);
   useEffect(()=>{

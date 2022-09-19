@@ -10,15 +10,13 @@ function Sendpost() {
     content:"",
   });
 
-
   const formDataFieldChanged = e => {
     const name = e.target.name;
     const formDataTemp = {...dataToSend};
     formDataTemp[name] = e.target.value;
     setDataToSend(formDataTemp);
 }
-
-const imageChanged = e => {
+  const imageChanged = e => {
   setImageFile(e.target.files[0]);
 }
 

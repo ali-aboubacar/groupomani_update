@@ -7,15 +7,15 @@ function UpdateForm() {
   const [singlePost, setSinglePosts] = useState([]);
   const [imageFile, setImageFile] = useState(null);
   const [dataToSend, setDataToSend] = useState({
-    title:"",
-    content:"",
+    title:singlePost.title,
+    content:singlePost.content,
   });
   const {id} = useParams();
 useEffect(()=>{
-  axios.get(`http://localhost:4000/api/posts/${id}`).then((response) => {
-    setSinglePosts(response.data);
+  axios.get(`http://localhost:4000/api/posts/${id}`).then((res) => {
+    setSinglePosts(res.data);
   });
-}, []);
+}, [id]);
   
 
   const formDataFieldChanged = e => {
@@ -36,19 +36,20 @@ const imageChanged = e => {
     formDataToSend.append('content', dataToSend.content);
     formDataToSend.append('file', imageFile);
     
-    const config = {     
-      headers: { 'content-type': 'multipart/form-data' }
-  }
-
-    const req = await axios.put(`http://localhost:4000/api/posts/${id}`, formDataToSend, config);
-    console.log(req);
-    e.target.reset();
+      try {
+          const res = await axios.put(`http://localhost:4000/api/posts/${id}`, formDataToSend);
+          console.log(res.data);
+          e.target.reset();
+      } catch (err) {
+          // Handle Error Here
+          console.error(err);
+      }
   }
   
   return (
     <div className="post-component">
             <form encType="multipart/form"  onSubmit={submitData}>
-            <input name="title" type="text" placeholder='post title' onChange={formDataFieldChanged}/>
+            <input name="title" type="text" placeholder='entree un titre' onChange={formDataFieldChanged} />
             <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content"></textarea>
             <input name="imageFile" type="file" onChange={imageChanged} />
             <input type="submit" value="valider" />

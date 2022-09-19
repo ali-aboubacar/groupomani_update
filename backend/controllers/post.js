@@ -46,11 +46,10 @@ exports.getOnePost = (req, res, next) => {
 };
 //modifier une sauce
 exports.modifyPost = (req, res, next) => {
-  //verifier si la requete contien une image
-  const postParse = JSON.parse(req.body.post);
+  //verifier si
   const postObject = req.file
     ? {
-        ...postParse,
+        ...req.body,
         imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,

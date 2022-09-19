@@ -1,7 +1,7 @@
 import './style.css'
 import {useState, useEffect} from 'react'
 import Update from '../Update'
-import { useParams } from 'react-router-dom'
+import {useNavigate,useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // import {Route} from "react-router-dom"
@@ -10,14 +10,14 @@ import axios from 'axios'
 
 function Displayonepost() {
   const [singlePost, setSinglePosts] = useState([]);
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(false);
   const {id} = useParams();
+  const navigate = useNavigate();
   const [isUpdate, setIsUpdate] = useState(false);
   const deletePost = async (e) =>{
     const req = await axios.delete(`http://localhost:4000/api/posts/${id}`);
-    setStatus('Delete successful',req);
-    // const data = singlePost.filter(i => i.id !== singlePost.id)
-    // setSinglePosts({data})
+    setStatus(!status,req);
+    navigate('/');
   }
   const updatePost = async (e) =>{
     setIsUpdate(!isUpdate);
@@ -31,7 +31,7 @@ function Displayonepost() {
   },[id]);
   return (
     <>
-    { isUpdate ? <Update /> :     <div className='displaypost-component'>   
+    { isUpdate ? <Update /> :     <div className='displaypost-component' id='displaypost-id'>   
     <div className='post-card' key={singlePost.id} >
     <div className='card-header'>
         <img src={singlePost.imageUrl} alt="une description complete" />
