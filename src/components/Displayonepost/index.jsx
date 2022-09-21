@@ -9,11 +9,12 @@ import axios from 'axios'
 
 
 function Displayonepost() {
-  const [singlePost, setSinglePosts] = useState([]);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [singlePost, setSinglePost] = useState([]);
   const [status, setStatus] = useState(false);
   const {id} = useParams();
   const navigate = useNavigate();
-  const [isUpdate, setIsUpdate] = useState(false);
+
   const deletePost = async (e) =>{
     const req = await axios.delete(`http://localhost:4000/api/posts/${id}`);
     setStatus(!status,req);
@@ -27,7 +28,7 @@ function Displayonepost() {
   useEffect(()=>{
     fetch(`http://localhost:4000/api/posts/${id}`)
     .then((res) => res.json())
-    .then((onePost) => setSinglePosts(onePost));
+    .then((onePost) => setSinglePost(onePost));
   },[id]);
   return (
     <>
@@ -35,12 +36,12 @@ function Displayonepost() {
     <div className='post-card' key={singlePost.id} >
     <div className='card-header'>
         <img src={singlePost.imageUrl} alt="une description complete" />
-        <h1>{singlePost.title}</h1>
     </div>
     
-    <div className='card-header'>
-        <p>{singlePost.content}</p>
+    <div className='card-content'>
+    <h1>{singlePost.title}</h1>
         <img src={singlePost.imageUrl} alt="une description complete" />
+        <p>{singlePost.content}</p>
         <button onClick={deletePost}> Delete </button>
        <button onClick={updatePost}>Update</button>
 

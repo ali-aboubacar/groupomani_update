@@ -20,11 +20,11 @@ function Displaypost() {
             <Link to= {`/post/${post.id}`}>
             <div className='card-header'>
                 <img src={post.imageUrl} alt="une description complete" />
-                <h1>{post.title}</h1>
             </div>
-            
-            <div className='card-header'>
-                <p>{post.content}</p>
+
+            <div className='card-content'>
+            <h1>{post.title}</h1>
+            <p>{post.content}</p>
                 <img src={post.imageUrl} alt="une description complete" />
             </div>
             </Link>

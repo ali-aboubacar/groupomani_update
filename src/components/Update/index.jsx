@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
 function UpdateForm() {
-  const [singlePost, setSinglePosts] = useState([]);
+  const [singlePost, setSinglePost] = useState([]);
   const [imageFile, setImageFile] = useState(null);
   const [dataToSend, setDataToSend] = useState({
     title:singlePost.title,
@@ -13,7 +13,7 @@ function UpdateForm() {
   const {id} = useParams();
 useEffect(()=>{
   axios.get(`http://localhost:4000/api/posts/${id}`).then((res) => {
-    setSinglePosts(res.data);
+    setSinglePost(res.data);
   });
 }, [id]);
   
