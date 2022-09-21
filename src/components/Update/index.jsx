@@ -3,19 +3,14 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-function UpdateForm() {
-  const [singlePost, setSinglePost] = useState([]);
+function UpdateForm({post}) {
   const [imageFile, setImageFile] = useState(null);
   const [dataToSend, setDataToSend] = useState({
-    title:singlePost.title,
-    content:singlePost.content,
+    title:post.title,
+    content:post.content,
   });
   const {id} = useParams();
-useEffect(()=>{
-  axios.get(`http://localhost:4000/api/posts/${id}`).then((res) => {
-    setSinglePost(res.data);
-  });
-}, [id]);
+
   
 
   const formDataFieldChanged = e => {
@@ -34,7 +29,10 @@ const imageChanged = e => {
     const formDataToSend = new FormData();
     formDataToSend.append('title', dataToSend.title);
     formDataToSend.append('content', dataToSend.content);
-    formDataToSend.append('file', imageFile);
+    if(imageFile){
+      formDataToSend.append('file', imageFile);
+    }
+    
     
       try {
           const res = await axios.put(`http://localhost:4000/api/posts/${id}`, formDataToSend);
@@ -49,8 +47,8 @@ const imageChanged = e => {
   return (
     <div className="post-component">
             <form encType="multipart/form"  onSubmit={submitData}>
-            <input name="title" type="text" placeholder='entree un titre' onChange={formDataFieldChanged} />
-            <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content"></textarea>
+            <input name="title" type="text" placeholder='entree un titre' onChange={formDataFieldChanged} value={dataToSend.title}/>
+            <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content" value={dataToSend.content}></textarea>
             <input name="imageFile" type="file" onChange={imageChanged} />
             <input type="submit" value="valider" />
             </form>

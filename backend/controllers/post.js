@@ -62,12 +62,19 @@ exports.modifyPost = (req, res, next) => {
       if (!post) {
         res.status(401).json({ message: "Not authorized" });
       } else {
-        const Filename = post.imageUrl.split("/images/")[1];
-        fs.unlink(`images/${Filename}`, () => {
-          Post.update({ ...postObject }, { where: { id: req.params.id } })
-            .then(() => res.status(200).json({ message: "Objet modifié!" }))
-            .catch((error) => res.status(401).json({ error }));
-        });
+        if(post.imageUrl){
+          const Filename = post.imageUrl.split("/images/")[1];
+          fs.unlink(`images/${Filename}`, () => {
+            Post.update({ ...postObject }, { where: { id: req.params.id } })
+              .then(() => res.status(200).json({ message: "Objet modifié!" }))
+              .catch((error) => res.status(401).json({ error }));
+          });
+      }else{
+        Post.update({ ...postObject }, { where: { id: req.params.id } })
+              .then(() => res.status(200).json({ message: "Objet modifié!" }))
+              .catch((error) => res.status(401).json({ error }));
+      }
+
       }
     })
     .catch((error) => {

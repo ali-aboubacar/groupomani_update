@@ -10,7 +10,7 @@ import axios from 'axios'
 
 function Displayonepost() {
   const [isUpdate, setIsUpdate] = useState(false);
-  const [singlePost, setSinglePost] = useState([]);
+  const [singlePost, setSinglePost] = useState({});
   const [status, setStatus] = useState(false);
   const {id} = useParams();
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function Displayonepost() {
   },[id]);
   return (
     <>
-    { isUpdate ? <Update /> :     <div className='displaypost-component' id='displaypost-id'>   
+    { isUpdate ? <Update post={singlePost} /> :     <div className='displaypost-component' id='displaypost-id'>   
     <div className='post-card' key={singlePost.id} >
     <div className='card-header'>
         <img src={singlePost.imageUrl} alt="une description complete" />
