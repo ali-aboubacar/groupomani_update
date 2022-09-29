@@ -1,6 +1,7 @@
 import './style.css'
 import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import { postService } from '../../Services/postService';
 // import {Route} from "react-router-dom"
 // import DisplayPic from '../../assets/user-profile.png'
 
@@ -8,9 +9,9 @@ import { Link } from 'react-router-dom'
 function Displaypost() {
   const [posts, setPosts] = useState([]);
   useEffect(()=>{
-    fetch('http://localhost:4000/api/posts')
-    .then((res) => res.json())
-    .then((allPosts) => setPosts(allPosts));
+    postService.getAll().then(res=>{
+      setPosts(res.data);
+    });
   },[]);
   return (
     <div className='displaypost-component'>

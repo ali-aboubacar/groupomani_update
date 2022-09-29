@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react'
 import Update from '../Update'
 import {useNavigate,useParams } from 'react-router-dom'
 import axios from 'axios'
+import { postService } from '../../Services/postService'
 
 // import {Route} from "react-router-dom"
 // import DisplayPic from '../../assets/user-profile.png'
@@ -14,11 +15,16 @@ function Displayonepost() {
   const [status, setStatus] = useState(false);
   const {id} = useParams();
   const navigate = useNavigate();
-
+  
   const deletePost = async (e) =>{
-    const req = await axios.delete(`http://localhost:4000/api/posts/${id}`);
-    setStatus(!status,req);
-    navigate('/');
+    e.preventDefault();
+    try{
+      const req = await axios.delete(`http://localhost:4000/api/posts/${id}`);
+      setStatus(!status,req);
+      navigate('/');
+    }catch(err){
+      return err
+    }
   }
   const updatePost = async (e) =>{
     setIsUpdate(!isUpdate);
@@ -26,9 +32,9 @@ function Displayonepost() {
     // setSinglePosts({data})
   }
   useEffect(()=>{
-    fetch(`http://localhost:4000/api/posts/${id}`)
-    .then((res) => res.json())
-    .then((onePost) => setSinglePost(onePost));
+    postService.getOne(id).then(res=>{
+      setSinglePost(res.data);
+    })
   },[id]);
   return (
     <>

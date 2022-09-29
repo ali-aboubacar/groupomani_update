@@ -2,6 +2,9 @@ import './style.css'
 import {useState} from 'react'
 import Sidebar from '../../components/Sidebar'
 import axios from 'axios'
+import { storageService } from '../../Services/storageService';
+
+
 
 function Sendpost() {
   const [imageFile, setImageFile] = useState(null);
@@ -28,12 +31,16 @@ function Sendpost() {
     formDataToSend.append('file', imageFile);
     
     const config = {     
-      headers: { 'content-type': 'multipart/form-data' }
+      headers: { 'content-type': 'multipart/form-data',"authorization":"Bearer "+storageService.get('token') }
+  }
+  try{
+    const req = await axios.post("http://localhost:4000/api/posts", formDataToSend, config);
+    console.log(req.data);
+    e.target.reset();
+  }catch(err){
+    console.error(err);
   }
 
-    const req = await axios.post("http://localhost:4000/api/posts", formDataToSend, config);
-    console.log(req);
-    e.target.reset();
   }
   
   return (

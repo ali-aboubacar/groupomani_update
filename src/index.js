@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Create from './pages/Create';
 import Post from './pages/Post';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import { BrowserRouter,Routes,Route} from "react-router-dom"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +19,7 @@ root.render(
         <Route path="/" element={ <Home/> } />
         <Route path="/post/:id" element={ <Post/> } />
         <Route path="/login" element={ <Login/> } />
+        <Route path="/signup" element={ <Signup/> } />
         <Route path="/create" element={ <Create/> } />
         <Route path="/profile" element={ <Profile/> } />
       </Routes>

@@ -21,9 +21,9 @@ exports.createPost = (req, res, next) => {
     .then(() => {
       res.status(201).json({ message: "Objet enregistré !" });
     })
-    // .catch((error) => {
-    //   res.status(400).json({ error });
-    // });
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
 };
 //recupere une seul sauce
 exports.getOnePost = (req, res, next) => {
@@ -168,10 +168,10 @@ exports.deletePost = (req, res, next) => {
 exports.getAllPost = (req, res, next) => {
   Post.findAll()
     .then((data) => {
-      res.send(data);
+      return res.status(200).send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      return res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving the Posts.",
       });
