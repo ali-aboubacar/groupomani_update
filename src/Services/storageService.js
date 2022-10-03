@@ -16,7 +16,10 @@ export const storageService = {
         }else{
           data = JSON.parse(data);
         }
-        data [propName] = newData;
+        data[propName] = newData;
         window.localStorage.setItem(key, JSON.stringify(data))
+    },
+    remove: ()=>{
+        window.localStorage.removeItem(key)
     }
 };

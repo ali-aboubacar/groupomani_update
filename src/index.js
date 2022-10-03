@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './style.css';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Create from './pages/Create';
 import Post from './pages/Post';
@@ -23,6 +22,5 @@ root.render(
         <Route path="/create" element={ <Create/> } />
         <Route path="/profile" element={ <Profile/> } />
       </Routes>
-  <Footer/>
   </BrowserRouter>
 );

@@ -27,7 +27,7 @@ try{
      const password_valid = await bcrypt.compare(req.body.password,user.password);
      if(password_valid){
          token = jwt.sign({ email: maskEmail(user.email), userId: user.id, isAdmin: user.isAdmin },process.env.JWT_SECRET);
-         return res.status(200).json({ token : token });
+         return res.status(200).json({ token : token ,userId: user.id });
      } else {
        return res.status(400).json({ error : "Password Incorrect" });
      }
@@ -39,41 +39,26 @@ try{
 catch(err){
   return res.status(501).json({error:"une erreur inconnue est survenue",errorData:err})
 }
-  // User.findOne({ where: { email: req.body.email } })
-  //   .then((user) => {
-  //     if (!user) {
-  //       return res
-  //         .status(401)
-  //         .json({ message: "Paire login/mot de passe incorrecte" });
-  //     } else {
-  //       //si la reponse est true comparer le password avec bcrypt
-  //       bcrypt
-  //         .compare(user.password, req.body.password)
-  //         .then((valid) => {
-  //           //si la reponse est false
-  //           if (!valid) {
-  //             return res
-  //               .status(401)
-  //               .json({ message: "Paire login/mot de passe incorrecte" });
-  //           } else {
-  //             //si valid est true creer un jwt_token
-  //             res.status(200).json({
+};
 
-
-  //               token: jwt.sign(
-  //                 { email: maskEmail(user.email), userId: user.id, isAdmin: user.isAdmin },
-  //                 process.env.JWT_SECRET,
-  //                 {
-  //                   expiresIn: "24h",
-  //                 }
-  //               ),
-  //             });
-  //           }
-  //         })
-  //         .catch((error) => res.status(500).json({ error }));
-  //     }
-  //   })
-  //   .catch((error) => res.status(500).json({ error }));
+//recupere une seul sauce
+exports.getOneUser = (req, res, next) => {
+  const id = req.params.id;
+  User.findByPk(id)
+    .then((data) => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Post with id=${id}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Post with id=" + id,
+      });
+    });
 };
 
 function maskEmail(email) {

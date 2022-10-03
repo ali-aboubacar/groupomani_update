@@ -2,7 +2,9 @@ import './style.css'
 import DarkLogo from '../../assets/Logo-groupomania.png'
 import { Link } from 'react-router-dom'
 
+
 function Navbar() {
+  
   return (
     <div className="navbar-component">
         <header>

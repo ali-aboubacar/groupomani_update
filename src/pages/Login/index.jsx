@@ -1,6 +1,6 @@
 import {useState} from 'react'
+import './style.css'
 import {useNavigate, Link} from 'react-router-dom'
-import axios from 'axios'
 import { userService } from '../../Services/userService';
 
 
@@ -22,30 +22,28 @@ function LoginForm() {
     setDataToSend(formDataTemp);
 }
 
-const config = {     
-  headers: { 'content-type': 'Application/json' }
-}
-
   const loginUser = async (e) =>{
     e.preventDefault();
-    const res = await userService.login(dataToSend);
-    console.log(res);
-    navigate('/');
+    try{
+      const res = await userService.login(dataToSend);
+      console.log('##########',res);
+      navigate('/');
+    }catch(err){
+      return err
+    }
   }
 
   return (
     <section className="home-section">
-   <div className='displaypost-component' id='displaypost-id'>   
-    <div className='post-card' >
-    <form onSubmit={loginUser}>
-            <input name="email" type="email" placeholder='email' onChange={formDataFieldChanged}/>
-            <input name="password" type="password" placeholder='password' onChange={formDataFieldChanged}/>
-            <input type="submit" value="Login" />
+    <div className="login-component">
+            <form onSubmit={loginUser}>
+            <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged}/>
+            <input name="password" type="password" placeholder='Password' onChange={formDataFieldChanged}/>
+            <input type="submit" value="valider" />
             </form>
-        <Link to='/signup'>Sign Up</Link>
-</div>
-</div>
-</section>
+            <Link to='/signup'>Sign Up</Link>
+        </div>
+        </section>
 )
 }
 

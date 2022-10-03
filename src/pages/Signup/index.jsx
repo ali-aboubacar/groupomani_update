@@ -1,9 +1,9 @@
 import {useState} from 'react'
-import axios from 'axios'
+import './style.css'
 import { useNavigate } from 'react-router-dom';
 import {userService} from '../../Services/userService'
 
-function SignUpForm(loged) {
+function SignUpForm() {
   const [dataToSend, setDataToSend] = useState({
     lastName:"",
     firstName:"",
@@ -22,14 +22,18 @@ function SignUpForm(loged) {
 
   const submitData = async (e) => {
     e.preventDefault();
-    const req = await userService.signup(dataToSend)
-    console.log(req);
-    navigate('/login');
+    try{
+      const req = await userService.signup(dataToSend)
+      console.log(req);
+      navigate('/login');
+    }catch(err){
+      return err
+    }
   }
   
   return ( 
     <section className="home-section">
-    <div className="post-component">
+    <div className="signup-component">
             <form onSubmit={submitData}>
             <input name="firstName" type="text" placeholder='First Name' onChange={formDataFieldChanged}/>
             <input name="lastName" type="text" placeholder='Last Name' onChange={formDataFieldChanged}/>

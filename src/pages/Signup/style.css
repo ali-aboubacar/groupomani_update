@@ -1,23 +1,33 @@
-
-.login-component{
+.signup-component{
     width:80%;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.login-component form{
+.signup-component form{
     width: 60%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
-.login-component input:nth-child(1),
-input:nth-child(2){
+.signup-component input:nth-child(1), 
+input:nth-child(2),
+input:nth-child(3),
+input:nth-child(4){
     width:100%;
     height: 30px;
     margin-bottom: 3%;
     border-radius: 15px;
     display: flex;
     justify-content: center;
+}
+.signup-component input:nth-child(5){
+    background-color: aqua;
+    width: 50%;
+    height: 35px;
+    border-radius: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

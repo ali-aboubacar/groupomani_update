@@ -16,6 +16,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.BOOLEAN,
       defaultValue:false,
     },
+    profileImg:{
+      type: Sequelize.STRING,
+      defaultValue:'https://www.herbeumont.be/macommune/vie-politique/conseil-communal/img/no-profile-image-png.png/image_view_fullscreen',
+    }
   });
   return User;
 };

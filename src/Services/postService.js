@@ -1,4 +1,5 @@
 import { fetchData } from "./fetchService";
+
 export const postService= {
     getAll: async ()=>{
         const result = await fetchData('posts','GET',null,true)

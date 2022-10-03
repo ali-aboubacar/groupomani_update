@@ -5,17 +5,15 @@ const Op = db.Sequelize.Op;
 const fs = require("fs");
 //cree une sauce
 exports.createPost = (req, res, next) => {
-  // delete postObject._id;
-  // delete postObject._userId;
-  console.log('#######',req.file);
+  const userId = req.auth.userId;
   const post = req.file
     ? {
-        ...req.body,
+        ...req.body,userId,
         imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
-    : { ...req.body };
+    : { ...req.body,userId };
 
   Post.create(post)
     .then(() => {
@@ -44,6 +42,7 @@ exports.getOnePost = (req, res, next) => {
       });
     });
 };
+
 //modifier une sauce
 exports.modifyPost = (req, res, next) => {
   //verifier si
