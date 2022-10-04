@@ -33,7 +33,6 @@ db.dislikes = require("./Dislike.js")(sequelize, Sequelize);
 
 // db.ROLES = ["user", "admin"];
 db.roles.belongsTo(db.users);
-db.users.hasMany(db.roles);
 
 db.users.hasMany(db.posts, {
   foreignKey: {

@@ -8,13 +8,15 @@ import { userService } from '../../Services/userService';
 // import DisplayPic from '../../assets/user-profile.png'
 
 
+
+
 function LoginForm() {
   const [dataToSend, setDataToSend] = useState({
     email:"",
     password:"",
   });
   const navigate = useNavigate();
-
+  
   const formDataFieldChanged = e => {
     const name = e.target.name;
     const formDataTemp = {...dataToSend};
@@ -26,7 +28,7 @@ function LoginForm() {
     e.preventDefault();
     try{
       const res = await userService.login(dataToSend);
-      console.log('##########',res);
+      console.log("@@@@@@@@@@",res)
       navigate('/');
     }catch(err){
       return err

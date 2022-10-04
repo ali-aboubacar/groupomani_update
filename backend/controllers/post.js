@@ -32,13 +32,13 @@ exports.getOnePost = (req, res, next) => {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Post with id=${id}.`,
+          message: `Post introuvable id=${id}.`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving Post with id=" + id,
+        message: "Une Erreur est survenue lors de la recuperation du Post id=" + id,
       });
     });
 };
@@ -59,7 +59,7 @@ exports.modifyPost = (req, res, next) => {
   Post.findByPk(req.params.id)
     .then((post) => {
       if (!post) {
-        res.status(401).json({ message: "Not authorized" });
+        res.status(401).json({ message: "Acces Refuser" });
       } else {
         if(post.imageUrl){
           const Filename = post.imageUrl.split("/images/")[1];
@@ -146,7 +146,7 @@ exports.deletePost = (req, res, next) => {
   Post.findByPk(req.params.id)
     .then((user) => {
       if (!user) {
-        res.status(401).json({ message: "Not authorized" });
+        res.status(401).json({ message: "Acces Refuser" });
       } else {
         const filename = user.imageUrl.split("/images/")[1];
         fs.unlink(`images/${filename}`, () => {
@@ -172,7 +172,7 @@ exports.getAllPost = (req, res, next) => {
     .catch((err) => {
       return res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving the Posts.",
+          err.message || "Une Erreur est survenue lors de la recuperation du post.",
       });
     });
 };

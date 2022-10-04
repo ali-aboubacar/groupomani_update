@@ -1,10 +1,11 @@
 const bcrypt = require("bcrypt");
 const db = require("./../models");
 const User = db.users;
+const Role = db.roles;
 const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
 //creation d'un utilisateur
-exports.signup = (req, res, next) => {
+exports.signup = async (req, res, next) => {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(req.body.password, salt, function(err, hash) {
         const user = {
@@ -17,6 +18,7 @@ exports.signup = (req, res, next) => {
           .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
           .catch((error) => res.status(401).json({ error }));
       });
+      Role.findAll({ include: User });
   });
 };
 //utiliser bcrypte pour comparer le password saisie
@@ -26,14 +28,14 @@ try{
   if(user){
      const password_valid = await bcrypt.compare(req.body.password,user.password);
      if(password_valid){
-         token = jwt.sign({ email: maskEmail(user.email), userId: user.id, isAdmin: user.isAdmin },process.env.JWT_SECRET);
-         return res.status(200).json({ token : token ,userId: user.id });
+         const token = jwt.sign({ userId: user.id, isAdmin: user.isAdmin,roleId:user.roleId },process.env.JWT_SECRET);
+         return res.status(200).json({ token : token ,userId: user.id, isAdmin:user.isAdmin,roleId:user.roleId });
      } else {
-       return res.status(400).json({ error : "Password Incorrect" });
+       return res.status(400).json({ error : "Mots de passe Incorect" });
      }
    
    }else{
-     return res.status(404).json({ error : "User does not exist" });
+     return res.status(404).json({ error : "Utilisateur n'existe pas" });
    }
 }
 catch(err){
@@ -50,13 +52,13 @@ exports.getOneUser = (req, res, next) => {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Post with id=${id}.`,
+          message: `Utilisateur avec id=${id} est introuvable.`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving Post with id=" + id,
+        message: "Utilisateur est introuvable id="+ id,
       });
     });
 };

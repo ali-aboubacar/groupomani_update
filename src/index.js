@@ -8,7 +8,9 @@ import Create from './pages/Create';
 import Post from './pages/Post';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import { BrowserRouter,Routes,Route} from "react-router-dom"
+import { BrowserRouter,Routes,Route} from "react-router-dom";
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
