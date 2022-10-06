@@ -32,7 +32,6 @@ function SignUpForm() {
   }
   
   return ( 
-    <section className="home-section">
     <div className="signup-component">
             <form onSubmit={submitData}>
             <input name="firstName" type="text" placeholder='First Name' onChange={formDataFieldChanged}/>
@@ -42,7 +41,6 @@ function SignUpForm() {
             <input type="submit" value="valider" />
             </form>
         </div>
-        </section>
   )
 }
 

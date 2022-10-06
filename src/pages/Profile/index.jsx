@@ -25,7 +25,6 @@ function Displayprofile() {
     })
   },[id]);
   return (
-    <section className="home-section">
     <div className='displaypost-component' id='displaypost-id'>   
     <div className='post-card' key={userProfile.id}>
     <div className='card-header'>
@@ -38,7 +37,6 @@ function Displayprofile() {
     </div>
 </div>
 </div>
-</section>
 )
 }
 

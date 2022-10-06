@@ -16,7 +16,7 @@ export const userService= {
         return clearStorage;
     },
     getCurrentUser: async (id)=>{
-        const result = await fetchData('auth/profile/'+id,'GET',null,true)
+        const result = await fetchData('auth/user/'+id,'GET',null,true)
         return result
     },
 

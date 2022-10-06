@@ -36,7 +36,6 @@ function LoginForm() {
   }
 
   return (
-    <section className="home-section">
     <div className="login-component">
             <form onSubmit={loginUser}>
             <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged}/>
@@ -45,7 +44,7 @@ function LoginForm() {
             </form>
             <Link to='/signup'>Sign Up</Link>
         </div>
-        </section>
+
 )
 }
 

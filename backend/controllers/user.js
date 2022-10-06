@@ -29,7 +29,7 @@ try{
      const password_valid = await bcrypt.compare(req.body.password,user.password);
      if(password_valid){
          const token = jwt.sign({ userId: user.id, roleId:user.roleId },process.env.JWT_SECRET);
-         return res.status(200).json({ token : token ,userId: user.id, roleId:user.roleId });
+         return res.status(200).json({ token : token ,userId: user.id});
      } else {
        return res.status(400).json({ error : "Mots de passe Incorect" });
      }

@@ -1,6 +1,5 @@
 import './style.css'
 import {useState} from 'react'
-import Sidebar from '../../components/Sidebar'
 import axios from 'axios'
 import { storageService } from '../../Services/storageService';
 
@@ -44,8 +43,6 @@ function Sendpost() {
   }
   
   return (
-    <section className="home-section">
-    <Sidebar/>
     <div className="post-component">
             <form encType="multipart/form"  onSubmit={submitData}>
             <input name="title" type="text" placeholder='post title' onChange={formDataFieldChanged}/>
@@ -54,7 +51,7 @@ function Sendpost() {
             <input type="submit" value="valider" />
             </form>
         </div>
-  </section>
+
   )
 }
 
