@@ -5,6 +5,7 @@ export const userService= {
         const result = await fetchData('auth/login','POST',{email,password},false)
         storageService.set("token",result.data.token)
         storageService.set("userId",result.data.userId)
+        storageService.set("isAdmin",result.data.isAdmin)
         return result
     },
     signup: async ({firstName,lastName,email,password})=>{
@@ -12,7 +13,7 @@ export const userService= {
         return result
     },
     logout: async ()=>{
-        const clearStorage = storageService.remove("token","userId");
+        const clearStorage = await storageService.remove("token","userId");
         return clearStorage;
     },
     getCurrentUser: async (id)=>{

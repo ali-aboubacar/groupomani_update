@@ -17,22 +17,8 @@ db.sequelize = sequelize;
 db.users = require("./User.js")(sequelize, Sequelize);
 db.posts = require("./Post.js")(sequelize, Sequelize);
 db.likes = require("./Like.js")(sequelize, Sequelize);
-db.roles = require("./Role.js")(sequelize, Sequelize);
 db.dislikes = require("./Dislike.js")(sequelize, Sequelize);
 
-// db.roles.belongsToMany(db.users, {
-//   through: "user_roles",
-//   foreignKey: "roleId",
-//   otherKey: "userId"
-// });
-// db.users.belongsToMany(db.roles, {
-//   through: "user_roles",
-//   foreignKey: "userId",
-//   otherKey: "roleId"
-// });
-
-// db.ROLES = ["user", "admin"];
-db.roles.belongsTo(db.users);
 
 db.users.hasMany(db.posts, {
   foreignKey: {

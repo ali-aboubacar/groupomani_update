@@ -6,11 +6,10 @@ import Login from '../Login'
 import Signup from '../Signup'
 import Create from '../Create'
 import Profile from '../Profile'
-import React, {useState, useEffect} from 'react'
-import { userService } from '../../Services/userService';
+import React, {useState,useEffect} from 'react'
+// import { userService } from '../../Services/userService';
 import { storageService } from '../../Services/storageService';
 import { Routes,Route} from "react-router-dom";
-export const UserContext = React.createContext();
 
 
 function Home() {
@@ -18,19 +17,20 @@ function Home() {
     userId:null,
     isAdmin:null,
   });
-  const id = storageService.get('userId')
+
   useEffect(()=>{
-    userService.getCurrentUser(id).then(res=>{
+    const id = storageService.get("userId");
+    const token = storageService.get("token")
+    const isAdmin = storageService.get("isAdmin")
       setUserDetails({
-        userId:res.data.id,
-        isAdmin:res.data.isAdmin,
+        userId:id,
+        token:token,
+        isAdmin:isAdmin,
       });
-    })
-  },[id]);
+  },[]);
   return (
     <section className="home-section">
       <Sidebar/>
-      {/* <Displaypost prop={isAdmin}/> */}
       <Routes>
         <Route exact path="/" element={ <Displaypost/> } />
         <Route path="/post/:id" element={ <Displayonepost props={userDetails} /> } />

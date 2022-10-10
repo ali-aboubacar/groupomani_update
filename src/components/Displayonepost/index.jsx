@@ -28,15 +28,12 @@ function Displayonepost({props}) {
   }
   const updatePost = async (e) =>{
     setUpdateSinglePost(!updateSinglePost);
-    // const data = singlePost.filter(i => i.id !== singlePost.id)
-    // setSinglePosts({data})
   }
   useEffect(()=>{
     postService.getOne(id).then(res=>{
       setSinglePost(res.data);
     })
   },[id]);
-  console.log('$$$$$$$$$$$',props.userId, props.isAdmin, singlePost.userId);
   return (
     <>
     { updateSinglePost ? <Update post={singlePost} /> :     <div className='displaypost-component' id='displaypost-id'>   
@@ -49,9 +46,8 @@ function Displayonepost({props}) {
     <h1>{singlePost.title}</h1>
         <img src={singlePost.imageUrl} alt="une description complete" />
         <p>{singlePost.content}</p>
-        {props.userId === singlePost.userId && <button onClick={deletePost}> Delete </button>}
-        {props.userId === singlePost.userId && <button onClick={updatePost}> Update </button>}
-       {props.isAdmin && <button onClick={deletePost}> Delete as Admin</button>}
+        {(props.userId === singlePost.userId || props.isAdmin) && <button onClick={deletePost}> Delete </button>}
+        {(props.userId === singlePost.userId || props.isAdmin) && <button onClick={updatePost}> Update </button>}
 
     </div>
 </div>

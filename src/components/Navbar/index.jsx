@@ -6,18 +6,11 @@ import { Link } from 'react-router-dom'
 function Navbar() {
   
   return (
-    <div className="navbar-component">
-        <header>
+        <header >
             <Link to="/">
             <img src={DarkLogo} alt='une description tres indispansable '/>
             </Link>
-            <ul>
-            <Link to="/">home</Link>
-            <Link to="/create">Add Post</Link>
-            <Link to="/profile">profile</Link>
-            </ul>
         </header>
-    </div>
   );
 }
 

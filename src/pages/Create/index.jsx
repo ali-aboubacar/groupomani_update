@@ -51,7 +51,6 @@ function Sendpost() {
             <input type="submit" value="valider" />
             </form>
         </div>
-
   )
 }
 

@@ -1,8 +1,5 @@
-.navbar-component{
-    display: flex;
-    justify-content: center;
-}
-.navbar-component header{
+
+header{
     display: flex;
     height:13vh;
     width: 90%;
@@ -12,6 +9,6 @@
     top:0;
     background-color:#ffff;
 }
-.navbar-component img{
+header img{
     height: 200px;
 }
