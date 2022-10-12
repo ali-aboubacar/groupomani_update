@@ -1,5 +1,5 @@
 import './style.css'
-import DarkLogo from '../../assets/Logo-groupomania.png'
+import DarkLogo from '../../assets/Logo-groupomania.svg'
 import { Link } from 'react-router-dom'
 
 

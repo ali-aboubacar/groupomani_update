@@ -6,6 +6,7 @@ export const userService= {
         storageService.set("token",result.data.token)
         storageService.set("userId",result.data.userId)
         storageService.set("isAdmin",result.data.isAdmin)
+        storageService.set("loggedIn",result.data.loggedIn)
         return result
     },
     signup: async ({firstName,lastName,email,password})=>{

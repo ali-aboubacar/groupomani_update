@@ -2,6 +2,7 @@
 const db = require("./../models");
 const Post = db.posts;
 const Like = db.likes;
+const User = db.users;
 const Op = db.Sequelize.Op;
 const fs = require("fs");
 //cree une sauce
@@ -107,64 +108,6 @@ try{
   console.log(err)
   return res.status(500).json({message: err})
 }
-  // Like.findOne({where: { id: req.params.id }}).then((like) => {
-  //   const userId = req.auth.userId;
-  //   const usersLikedId = like.userId;
-  //   const postId = like.postId;
-  //   const likeStatus = req.body.like;
-  //   switch (likeStatus) {
-  //     case 1:
-  //       //si userId n'existe pas dans le array usersLiked ajouter un like
-  //       if (usersLikedId.indexOf(userId) === -1) {
-  //         Sauce.findOneAndUpdate(
-  //           { _id: req.params.id },
-  //           { $inc: { likes: 1 }, $push: { usersLiked: userId } }
-  //         )
-  //           .then(() => res.status(200).json({ message: "like Ajouter" }))
-  //           .catch((error) => res.status(401).json({ error }));
-  //       } else {
-  //         res.status(403).json({ error: " vous ne pouvez pas like" });
-  //       }
-  //       break;
-  //     case 0:
-  //       //si userId existe dans l'array usersLiked suprimer le like
-  //       if (usersLiked.indexOf(userId) > -1) {
-  //         Sauce.findOneAndUpdate(
-  //           { _id: req.params.id },
-  //           { $inc: { likes: -1 }, $pull: { usersLiked: userId } }
-  //         )
-  //           .then(() => res.status(200).json({ message: "like suprimer" }))
-  //           .catch((error) => res.status(401).json({ error }));
-  //       }
-  //       //si userId existe dans l'array usersDisliked suprimer le dislike
-  //       else if (usersDisliked.indexOf(userId) > -1) {
-  //         Sauce.findOneAndUpdate(
-  //           { _id: req.params.id },
-  //           { $inc: { dislikes: -1 }, $pull: { usersDisliked: userId } }
-  //         )
-  //           .then(() => res.status(200).json({ message: "disLike suprimer" }))
-  //           .catch((error) => res.status(401).json({ error }));
-  //       }
-  //       //si tout ces cas ne sont pas verifier retourner un erreur 403
-  //       else {
-  //         res.status(403).json({ error: "erreur inconue " });
-  //       }
-  //       break;
-  //     case -1:
-  //       //si userId n'existe pas dans l'array usersDisliked ajouter un dislike
-  //       if (usersDisliked.indexOf(userId) === -1) {
-  //         Sauce.findOneAndUpdate(
-  //           { _id: req.params.id },
-  //           { $inc: { dislikes: 1 }, $push: { usersDisliked: userId } }
-  //         )
-  //           .then(() => res.status(200).json({ message: "dislike Ajouter" }))
-  //           .catch((error) => res.status(401).json({ error }));
-  //       } else {
-  //         res.status(403).json({ error: " vous ne pouvez pas dislike" });
-  //       }
-  //       break;
-  //   }
-  // });
 };
 //suprimer une sauce
 exports.deletePost = (req, res, next) => {
@@ -193,8 +136,9 @@ exports.deletePost = (req, res, next) => {
 //recuperer toute les sauces
 
 exports.getAllPost = (req, res, next) => {
-  Post.findAll({ include: [Like] })
+  Post.findAll({ include: Like,order: [ [ 'createdAt', 'DESC' ]]},)
     .then((data) => {
+      console.log(JSON.stringify(data, null, 2));
       return res.status(200).send(data);
     })
     .catch((err) => {

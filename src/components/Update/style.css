@@ -1,8 +1,3 @@
-.home-section{
-    display:flex;
-    justify-content:flex-end;
-    margin-top:15vh;
-  }
 .post-component{
     width:80%;
     display: flex;

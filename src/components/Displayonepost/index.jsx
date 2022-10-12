@@ -4,6 +4,7 @@ import Update from '../Update'
 import {useNavigate,useParams } from 'react-router-dom'
 import axios from 'axios'
 import { postService } from '../../Services/postService'
+import Sidebar from '../Sidebar'
 
 // import {Route} from "react-router-dom"
 // import DisplayPic from '../../assets/user-profile.png'
@@ -35,7 +36,8 @@ function Displayonepost({props}) {
     })
   },[id]);
   return (
-    <>
+    <section className='home-section'>
+      <Sidebar/>
     { updateSinglePost ? <Update post={singlePost} /> :     <div className='displaypost-component' id='displaypost-id'>   
     <div className='post-card' key={singlePost.id} >
     <div className='card-header'>
@@ -46,15 +48,16 @@ function Displayonepost({props}) {
     <h1>{singlePost.title}</h1>
         <img src={singlePost.imageUrl} alt="une description complete" />
         <p>{singlePost.content}</p>
+        <div className='card-btn'>
         {(props.userId === singlePost.userId || props.isAdmin) && <button onClick={deletePost}> Delete </button>}
         {(props.userId === singlePost.userId || props.isAdmin) && <button onClick={updatePost}> Update </button>}
-
+        </div>
     </div>
 </div>
 </div>
 
 }
-</>
+</section>
 )
 }
 

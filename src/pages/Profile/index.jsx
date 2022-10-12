@@ -3,7 +3,8 @@ import {useState, useEffect} from 'react'
 // import EditProfile from '../../components/Editprofile'
 
 import { userService } from '../../Services/userService'
-import { storageService } from '../../Services/storageService';
+import { storageService } from '../../Services/storageService'
+import Sidebar from '../../components/Sidebar'
 
 // import {Route} from "react-router-dom"
 // import DisplayPic from '../../assets/user-profile.png'
@@ -25,6 +26,8 @@ function Displayprofile() {
     })
   },[id]);
   return (
+    <section className='home-section'>
+      <Sidebar/>
     <div className='displaypost-component' id='displaypost-id'>   
     <div className='post-card' key={userProfile.id}>
     <div className='card-header'>
@@ -37,6 +40,7 @@ function Displayprofile() {
     </div>
 </div>
 </div>
+</section>
 )
 }
 

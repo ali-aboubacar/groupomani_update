@@ -27,17 +27,17 @@ try{
      const password_valid = await bcrypt.compare(req.body.password,user.password);
      if(password_valid){
          const token = jwt.sign({ userId: user.id, isAdmin:user.isAdmin },process.env.JWT_SECRET);
-         return res.status(200).json({ token : token ,userId: user.id ,isAdmin:user.isAdmin});
+         return res.status(200).json({ token : token ,userId: user.id ,isAdmin:user.isAdmin, loggedIn:true});
      } else {
-       return res.status(400).json({ error : "Mots de passe Incorect" });
+       return res.status(400).json({ error : "Mots de passe Incorect" ,loggedIn:false});
      }
    
    }else{
-     return res.status(404).json({ error : "Utilisateur n'existe pas" });
+     return res.status(404).json({ error : "Utilisateur n'existe pas" ,loggedIn:false});
    }
 }
 catch(err){
-  return res.status(501).json({error:"une erreur inconnue est survenue",errorData:err})
+  return res.status(501).json({error:"une erreur inconnue est survenue",errorData:err,loggedIn:false})
 }
 };
 

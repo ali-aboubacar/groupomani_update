@@ -21,16 +21,17 @@ db.dislikes = require("./Dislike.js")(sequelize, Sequelize);
 
 
 db.users.hasMany(db.posts, {
-  foreignKey: {
-    name: "userId",
-  },
+  onDelete: "cascade",
+});
+
+db.posts.belongsTo(db.users, {
+  onDelete: "cascade",
 });
 
 db.users.hasMany(db.likes, {
-  foreignKey: {
-    name: "userId",
-  },
+  onDelete: "cascade",
 });
+
 
 db.users.hasMany(db.dislikes, {
   foreignKey: {
@@ -38,11 +39,9 @@ db.users.hasMany(db.dislikes, {
   },
 });
 
-db.posts.hasMany(db.likes, {
-  foreignKey: {
-    name: "postId",
-  },
-});
+  db.posts.hasMany(db.likes, {
+    onDelete: "cascade",
+  });
 
 db.posts.hasMany(db.dislikes, {
   foreignKey: {

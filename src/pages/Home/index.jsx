@@ -1,5 +1,4 @@
 import './style.css';
-import Sidebar from '../../components/Sidebar'
 import Displaypost from '../../components/Displaypost'
 import Displayonepost from '../../components/Displayonepost';
 import Login from '../Login'
@@ -13,33 +12,30 @@ import { Routes,Route} from "react-router-dom";
 
 
 function Home() {
-  const [userDetails, setUserDetails] = useState({
-    userId:null,
-    isAdmin:null,
-  });
+  const [userDetails, setUserDetails] = useState();
 
   useEffect(()=>{
     const id = storageService.get("userId");
     const token = storageService.get("token")
     const isAdmin = storageService.get("isAdmin")
+    const loggedIn = storageService.get("loggedIn")
       setUserDetails({
         userId:id,
         token:token,
         isAdmin:isAdmin,
+        loggedIn:loggedIn,
       });
   },[]);
+  console.log(userDetails);
   return (
-    <section className="home-section">
-      <Sidebar/>
       <Routes>
         <Route exact path="/" element={ <Displaypost/> } />
         <Route path="/post/:id" element={ <Displayonepost props={userDetails} /> } />
-        <Route path="/login" element={ <Login/> } />
+        <Route path="/login" element={ <Login /> } />
         <Route path="/signup" element={ <Signup props={userDetails}/> } />
         <Route path="/create" element={ <Create/> } />
         <Route path="/profile" element={ <Profile props={userDetails}/> } />
       </Routes>
-    </section>
   );
 }
 

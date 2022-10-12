@@ -21,5 +21,6 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue:'https://www.nicepng.com/maxp/u2y3a9e6t4o0a9w7/',
     }
   });
+
   return User;
 };
