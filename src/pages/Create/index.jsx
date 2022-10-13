@@ -3,16 +3,29 @@ import {useState} from 'react'
 import axios from 'axios'
 import { storageService } from '../../Services/storageService';
 import Sidebar from '../../components/Sidebar'
+import { useEffect } from 'react';
 
 
 
 function Sendpost() {
   const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [dataToSend, setDataToSend] = useState({
     title:"",
     content:"",
   });
 
+  useEffect(()=>{
+    if(imageFile){
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(imageFile);
+    } else {
+      setImagePreview(null);
+    }
+  },[imageFile])
   const formDataFieldChanged = e => {
     const name = e.target.name;
     const formDataTemp = {...dataToSend};
@@ -52,6 +65,7 @@ function Sendpost() {
             <input name="title" type="text" placeholder='post title' onChange={formDataFieldChanged}/>
             <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content"></textarea>
             <input name="imageFile" type="file" onChange={imageChanged}/>
+            {imagePreview && <img src={imagePreview} alt="preview de Votre Selection" />}
             <input type="submit" value="valider" />
             </form>
         </div>

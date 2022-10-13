@@ -5,24 +5,28 @@ import {useNavigate,useParams } from 'react-router-dom'
 import axios from 'axios'
 import { postService } from '../../Services/postService'
 import Sidebar from '../Sidebar'
+import { storageService } from '../../Services/storageService'
 
 // import {Route} from "react-router-dom"
 // import DisplayPic from '../../assets/user-profile.png'
 
 
-function Displayonepost({props}) {
+function Displayonepost() {
   const [updateSinglePost, setUpdateSinglePost] = useState(false);
   const [singlePost, setSinglePost] = useState({});
+  const [userDetails, setUserDetails] = useState({});
   const [status, setStatus] = useState(false);
   const {id} = useParams();
   const navigate = useNavigate();
-
   const deletePost = async (e) =>{
     e.preventDefault();
+    const config = {     
+      headers: { 'content-type': 'multipart/form-data',"authorization":"Bearer "+storageService.get('token') }
+  }
     try{
-      const req = await axios.delete(`http://localhost:4000/api/posts/${id}`);
+      const req = await axios.delete(`http://localhost:4000/api/posts/${id}`,config);
       setStatus(!status,req);
-      navigate('/');
+      navigate('/displayPost');
     }catch(err){
       return err
     }
@@ -30,9 +34,16 @@ function Displayonepost({props}) {
   const updatePost = async (e) =>{
     setUpdateSinglePost(!updateSinglePost);
   }
+  
   useEffect(()=>{
     postService.getOne(id).then(res=>{
       setSinglePost(res.data);
+      const id = storageService.get("userId");
+      const isAdmin = storageService.get("isAdmin")
+      setUserDetails({
+        userId:id,
+        isAdmin:isAdmin,
+      });
     })
   },[id]);
   return (
@@ -49,8 +60,8 @@ function Displayonepost({props}) {
         <img src={singlePost.imageUrl} alt="une description complete" />
         <p>{singlePost.content}</p>
         <div className='card-btn'>
-        {(props.userId === singlePost.userId || props.isAdmin) && <button onClick={deletePost}> Delete </button>}
-        {(props.userId === singlePost.userId || props.isAdmin) && <button onClick={updatePost}> Update </button>}
+        {(userDetails.userId === singlePost.userId || userDetails.isAdmin) && <button onClick={deletePost}> Delete </button>}
+        {(userDetails.userId === singlePost.userId || userDetails.isAdmin) && <button onClick={updatePost}> Update </button>}
         </div>
     </div>
 </div>

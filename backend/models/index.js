@@ -17,7 +17,6 @@ db.sequelize = sequelize;
 db.users = require("./User.js")(sequelize, Sequelize);
 db.posts = require("./Post.js")(sequelize, Sequelize);
 db.likes = require("./Like.js")(sequelize, Sequelize);
-db.dislikes = require("./Dislike.js")(sequelize, Sequelize);
 
 
 db.users.hasMany(db.posts, {
@@ -32,20 +31,9 @@ db.users.hasMany(db.likes, {
   onDelete: "cascade",
 });
 
-
-db.users.hasMany(db.dislikes, {
-  foreignKey: {
-    name: "userId",
-  },
+db.posts.hasMany(db.likes, {
+  onDelete: "cascade",
 });
 
-  db.posts.hasMany(db.likes, {
-    onDelete: "cascade",
-  });
 
-db.posts.hasMany(db.dislikes, {
-  foreignKey: {
-    name: "postId",
-  },
-});
 module.exports = db;

@@ -1,5 +1,5 @@
 import { fetchData } from "./fetchService";
-import { storageService } from "./storageService";
+import { storageService , key } from "./storageService";
 export const userService= {
     login: async ({email,password})=>{
         const result = await fetchData('auth/login','POST',{email,password},false)
@@ -14,8 +14,7 @@ export const userService= {
         return result
     },
     logout: async ()=>{
-        const clearStorage = await storageService.remove("token","userId");
-        return clearStorage;
+        window.localStorage.removeItem(key)
     },
     getCurrentUser: async (id)=>{
         const result = await fetchData('auth/user/'+id,'GET',null,true)

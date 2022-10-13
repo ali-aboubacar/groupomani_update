@@ -29,13 +29,14 @@ function LoginForm() {
     try{
       const res = await userService.login(dataToSend);
       console.log("@@@@@@@@@@",res)
-      navigate('/');
+      navigate('/displayPost');
     }catch(err){
       return err
     }
   }
 
   return (
+    <section className='home-section'>
     <div className="login-component">
             <form onSubmit={loginUser}>
             <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged}/>
@@ -44,6 +45,7 @@ function LoginForm() {
             </form>
             <Link to='/signup'>Sign Up</Link>
         </div>
+        </section>
 
 )
 }

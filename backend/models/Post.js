@@ -9,6 +9,10 @@ module.exports = (sequelize, Sequelize) => {
     imageUrl: {
       type: Sequelize.STRING,
     },
+    likesNum:{
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    }
   });
   return Post;
 };

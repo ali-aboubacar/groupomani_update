@@ -94,16 +94,18 @@ try{
   const found = await Like.findOne({
     where: { postId: postId, userId: userId },
   });
+  const post = await Post.findByPk(postId);
   if (!found) {
      await Like.create({ postId: postId, userId: userId });
+     await post.increment('likesNum', { by: 1 });
     return res.status(200).json({ liked: true });
   } else {
     await Like.destroy({
       where: { postId: postId, userId: userId },
     });
+    await post.increment('likesNum', { by: -1 });
     return res.status(200).json({ liked: false });
   }
-
 }catch(err){
   console.log(err)
   return res.status(500).json({message: err})
@@ -136,12 +138,16 @@ exports.deletePost = (req, res, next) => {
 //recuperer toute les sauces
 
 exports.getAllPost = (req, res, next) => {
-  Post.findAll({ include: Like,order: [ [ 'createdAt', 'DESC' ]]},)
+  Post.findAll({ include: {
+    model: User,
+    attributes:["firstName","lastName"]
+  }, order: [ [ 'createdAt', 'DESC' ]]},)
     .then((data) => {
       console.log(JSON.stringify(data, null, 2));
       return res.status(200).send(data);
     })
     .catch((err) => {
+      console.log(err);
       return res.status(500).send({
         message:
           err.message || "Une Erreur est survenue lors de la recuperation du post.",

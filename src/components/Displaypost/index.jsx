@@ -11,38 +11,30 @@ import Sidebar from '../Sidebar';
  
 function Displaypost() {
   const [listOfPosts, setListOfPosts] = useState([]);
-  const [userOwner,setUserOwner] = useState();
   useEffect(()=>{
     postService.getAll().then(res=>{
+      console.log(res.data)
       setListOfPosts(res.data);
     });
   },[]);
-  const postOwner = async(userId)=>{
-    const req = await axios.get('http://localhost:4000/api/auth/user/'+userId,{     
-      headers: {"authorization":"Bearer "+storageService.get('token') }
-  });
-  console.log(req.data)
-  };
+  
   const handleLikes = async (postId) => {
     const req = await axios.get('http://localhost:4000/api/posts/likes/'+postId,{     
       headers: {"authorization":"Bearer "+storageService.get('token') }
   });
-  const res = await setListOfPosts(
+   setListOfPosts(
     listOfPosts.map((post) => {
       if (post.id === postId) {
         if (req.data.liked) {
-          return { ...post, likes: [...post.likes, 0] };
+          return { ...post, likesNum: post.likesNum+1 };
         } else {
-          const likesArray = post.likes;
-          likesArray.pop();
-          return { ...post, likes: likesArray };
+          return { ...post, likesNum: post.likesNum-1 };
         }
       } else {
         return post;
       }
     })
   );
-console.log(res);
 };
   return (
     <section className='home-section'>
@@ -50,7 +42,7 @@ console.log(res);
     <div className='displaypost-component'>
         {listOfPosts.map((post)=>{
            return (
-            <div className='post-card' key={post.id} onChange={postOwner(post.userId)} >
+            <div className='post-card' key={post.id} >
             <Link to= {`/post/${post.id}`}>
             <div className='card-header'>
                 <img src={post.imageUrl} alt="une description complete" />
@@ -66,7 +58,8 @@ console.log(res);
             <FaRegThumbsUp className='likesBtn' onClick={()=>{
             handleLikes(post.id);
            }}/>
-           <span>{post.likes.length}</span>
+           <span>{post.likesNum}</span>
+           <span>{post.user.lastName} {post.user.firstName}</span>
             </div>
         </div>
            )

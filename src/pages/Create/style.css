@@ -27,7 +27,7 @@
     display: flex;
     justify-content: center;
 }
-.post-component input:nth-child(4){
+.post-component input:nth-child(5){
     background-color: aqua;
     width: 50%;
     height: 35px;
@@ -42,4 +42,8 @@
     border-radius: 15px;
     margin-bottom: 3%;
     background-color:aqua;
+}
+
+.post-component img{
+    height:120px
 }

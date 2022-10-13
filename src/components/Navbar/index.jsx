@@ -7,7 +7,7 @@ function Navbar() {
   
   return (
         <header >
-            <Link to="/">
+            <Link to="/displayPost">
             <img src={DarkLogo} alt='une description tres indispansable '/>
             </Link>
         </header>

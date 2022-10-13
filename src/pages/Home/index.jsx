@@ -12,7 +12,7 @@ import { Routes,Route} from "react-router-dom";
 
 
 function Home() {
-  const [userDetails, setUserDetails] = useState();
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(()=>{
     const id = storageService.get("userId");
@@ -26,12 +26,12 @@ function Home() {
         loggedIn:loggedIn,
       });
   },[]);
-  console.log(userDetails);
   return (
       <Routes>
-        <Route exact path="/" element={ <Displaypost/> } />
-        <Route path="/post/:id" element={ <Displayonepost props={userDetails} /> } />
+        {userDetails.userId ? <Route exact path="/" element={ <Displaypost/> } /> : <Route exact path="/" element={ <Login/> } />}
+        <Route path="/post/:id" element={ <Displayonepost/> } />
         <Route path="/login" element={ <Login /> } />
+        <Route path="/displayPost" element={ <Displaypost /> } />
         <Route path="/signup" element={ <Signup props={userDetails}/> } />
         <Route path="/create" element={ <Create/> } />
         <Route path="/profile" element={ <Profile props={userDetails}/> } />
