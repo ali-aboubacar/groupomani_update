@@ -31,11 +31,9 @@ function Displayprofile() {
     <div className='displaypost-component' id='displaypost-id'>   
     <div className='post-card' key={userProfile.id}>
     <div className='card-header'>
-        <img src={userProfile.profileImg} alt="une description complete" />
+    <h3>{userProfile.lastName} {userProfile.firstName}</h3>
     </div> 
     <div className='card-content'>
-    <h1>{userProfile.lastName}</h1>
-        <p>{userProfile.firstName}</p>
        <button onClick={editProfileImg}>Update Profile</button>
     </div>
 </div>

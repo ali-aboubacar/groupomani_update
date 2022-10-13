@@ -8,7 +8,7 @@ const postRoutes = require("./routes/post");
 const userRoutes = require("./routes/user");
 
 db.sequelize
-  .sync({force:true})
+  .sync()
   .then(() => {
     console.log("Synced db.");
   })

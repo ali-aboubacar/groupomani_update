@@ -49,6 +49,7 @@ function Sendpost() {
   try{
     const req = await axios.post("http://localhost:4000/api/posts", formDataToSend, config);
     console.log(req.data);
+    setImagePreview(null);
     e.target.reset();
   }catch(err){
     console.error(err);

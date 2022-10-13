@@ -15,9 +15,11 @@ function Displayonepost() {
   const [updateSinglePost, setUpdateSinglePost] = useState(false);
   const [singlePost, setSinglePost] = useState({});
   const [userDetails, setUserDetails] = useState({});
-  const [status, setStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {id} = useParams();
   const navigate = useNavigate();
+
+
   const deletePost = async (e) =>{
     e.preventDefault();
     const config = {     
@@ -25,7 +27,6 @@ function Displayonepost() {
   }
     try{
       const req = await axios.delete(`http://localhost:4000/api/posts/${id}`,config);
-      setStatus(!status,req);
       navigate('/displayPost');
     }catch(err){
       return err
@@ -36,6 +37,7 @@ function Displayonepost() {
   }
   
   useEffect(()=>{
+    setLoading(true);
     postService.getOne(id).then(res=>{
       setSinglePost(res.data);
       const id = storageService.get("userId");
@@ -44,15 +46,18 @@ function Displayonepost() {
         userId:id,
         isAdmin:isAdmin,
       });
-    })
+      setLoading(false);
+    });
   },[id]);
   return (
     <section className='home-section'>
       <Sidebar/>
-    { updateSinglePost ? <Update post={singlePost} /> :     <div className='displaypost-component' id='displaypost-id'>   
+      {loading ? <div className='pre-loader-wrap'><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : 
+      <>
+          { updateSinglePost ? <Update post={singlePost} /> : 
+    <div className='displaypost-component' id='displaypost-id'>   
     <div className='post-card' key={singlePost.id} >
     <div className='card-header'>
-        <img src={singlePost.imageUrl} alt="une description complete" />
     </div>
     
     <div className='card-content'>
@@ -66,8 +71,10 @@ function Displayonepost() {
     </div>
 </div>
 </div>
-
 }
+      </>
+      }
+
 </section>
 )
 }

@@ -11,10 +11,12 @@ import Sidebar from '../Sidebar';
  
 function Displaypost() {
   const [listOfPosts, setListOfPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(()=>{
+    setLoading(true)
     postService.getAll().then(res=>{
-      console.log(res.data)
       setListOfPosts(res.data);
+      setLoading(false)
     });
   },[]);
   
@@ -39,33 +41,34 @@ function Displaypost() {
   return (
     <section className='home-section'>
       <Sidebar/>
-    <div className='displaypost-component'>
-        {listOfPosts.map((post)=>{
-           return (
-            <div className='post-card' key={post.id} >
-            <Link to= {`/post/${post.id}`}>
-            <div className='card-header'>
-                <img src={post.imageUrl} alt="une description complete" />
-                <h3></h3>
-            </div>
-            <div className='card-content'>
-            <h1>{post.title}</h1>
-            <p>{post.content}</p>
-                <img src={post.imageUrl} alt="une description complete" />
-            </div>
-            </Link>
-            <div className='card-footer'>
-            <FaRegThumbsUp className='likesBtn' onClick={()=>{
-            handleLikes(post.id);
-           }}/>
-           <span>{post.likesNum}</span>
-           <span>{post.user.lastName} {post.user.firstName}</span>
-            </div>
-        </div>
-           )
-        })}
-           
-    </div>
+      {loading ? <div className='pre-loader-wrap'><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : 
+          <div className='displaypost-component'>
+          {listOfPosts.map((post)=>{
+             return (
+              <div className='post-card' key={post.id} >
+              <Link to= {`/post/${post.id}`}>
+              <div className='card-header'>
+              <h3>{post.user.lastName} {post.user.firstName}</h3>
+              </div>
+              <div className='card-content'>
+              <h1>{post.title}</h1>
+              <p>{post.content}</p>
+                  <img src={post.imageUrl} alt="une description complete" />
+              </div>
+              </Link>
+              <div className='card-footer'>
+              <FaRegThumbsUp className='likesBtn' onClick={()=>{
+              handleLikes(post.id);
+             }}/>
+             <span>{post.likesNum}</span>
+              </div>
+          </div>
+             )
+          })}
+             
+      </div>
+      }
+
     </section >
   )
 }

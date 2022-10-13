@@ -59,6 +59,7 @@ const imageChanged = e => {
   }
   
   return (
+    <div className='displaypost-component'>
     <div className="post-component">
             <form encType="multipart/form"  onSubmit={submitData}>
             <input name="title" type="text" placeholder='entree un titre' onChange={formDataFieldChanged} value={dataToSend.title}/>
@@ -67,6 +68,7 @@ const imageChanged = e => {
             {imagePreview && <img src={imagePreview} alt="preview de votre selection" />}
             <input type="submit" value="valider" />
             </form>
+        </div>
         </div>
   )
 }
