@@ -6,6 +6,7 @@ import axios from 'axios'
 import { postService } from '../../Services/postService'
 import Sidebar from '../Sidebar'
 import { storageService } from '../../Services/storageService'
+import Loading from '../Loading'
 
 // import {Route} from "react-router-dom"
 // import DisplayPic from '../../assets/user-profile.png'
@@ -40,19 +41,22 @@ function Displayonepost() {
     setLoading(true);
     postService.getOne(id).then(res=>{
       setSinglePost(res.data);
+      console.log(res.data)
       const id = storageService.get("userId");
       const isAdmin = storageService.get("isAdmin")
       setUserDetails({
         userId:id,
         isAdmin:isAdmin,
       });
-      setLoading(false);
+      setTimeout(()=>{
+        setLoading(false)
+      },1000) 
     });
   },[id]);
   return (
     <section className='home-section'>
       <Sidebar/>
-      {loading ? <div className='pre-loader-wrap'><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : 
+      {loading ? <Loading/> : 
       <>
           { updateSinglePost ? <Update post={singlePost} /> : 
     <div className='displaypost-component' id='displaypost-id'>   

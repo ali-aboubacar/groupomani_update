@@ -23,7 +23,7 @@ h1,h3,p{
 .post-card{
     width:95%;
     margin-bottom:5%;
-    border-radius: 20px;
+    border-radius: 6px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .card-header{
@@ -31,7 +31,7 @@ h1,h3,p{
     height:50px;
     width:100%;
     background: #FFD7D7;
-    border-radius: 20px 20px 0 0;
+    border-radius: 6px 6px 0 0;
 }
 .card-header ul{
     height:50px;

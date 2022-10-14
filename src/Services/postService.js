@@ -6,7 +6,7 @@ export const postService= {
         return result
     },
     create: async (newPost)=>{
-        const result = await fetchData('posts','POST',newPost,true)
+        const result = await fetchData('posts','POST',newPost,true,true)
         return result
     },  
     getOne: async (id)=>{

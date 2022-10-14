@@ -7,6 +7,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import axios from 'axios'
 import { storageService } from '../../Services/storageService';
 import Sidebar from '../Sidebar';
+import Loading from '../Loading';
 // import DisplayPic from '../../assets/user-profile.png'
  
 function Displaypost() {
@@ -16,7 +17,9 @@ function Displaypost() {
     setLoading(true)
     postService.getAll().then(res=>{
       setListOfPosts(res.data);
-      setLoading(false)
+      setTimeout(()=>{
+        setLoading(false)
+      },1000) 
     });
   },[]);
   
@@ -41,7 +44,7 @@ function Displaypost() {
   return (
     <section className='home-section'>
       <Sidebar/>
-      {loading ? <div className='pre-loader-wrap'><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : 
+      {loading ? <Loading/> : 
           <div className='displaypost-component'>
           {listOfPosts.map((post)=>{
              return (

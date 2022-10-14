@@ -4,6 +4,7 @@ import axios from 'axios'
 import { storageService } from '../../Services/storageService';
 import Sidebar from '../../components/Sidebar'
 import { useEffect } from 'react';
+import { postService } from '../../Services/postService';
 
 
 
@@ -47,7 +48,8 @@ function Sendpost() {
       headers: { 'content-type': 'multipart/form-data',"authorization":"Bearer "+storageService.get('token') }
   }
   try{
-    const req = await axios.post("http://localhost:4000/api/posts", formDataToSend, config);
+    // const req = await axios.post("http://localhost:4000/api/posts", formDataToSend, config);
+    const req = await postService.create(formDataToSend)
     console.log(req.data);
     setImagePreview(null);
     e.target.reset();

@@ -28,7 +28,10 @@ exports.createPost = (req, res, next) => {
 //recupere une seul sauce
 exports.getOnePost = (req, res, next) => {
   const id = req.params.id;
-  Post.findByPk(id)
+  Post.findOne({ include: {
+    model: User,
+    attributes:["firstName","lastName"]
+  },where:{id:id}})
     .then((data) => {
       if (data) {
         res.send(data);

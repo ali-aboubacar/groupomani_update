@@ -1,11 +1,17 @@
 import { storageService } from "./storageService";
-export const  fetchData = async (url,method="GET",body,hasAuth=false)=>{
+export const  fetchData = async (url,method="GET",body,hasAuth=false,isFormData=false)=>{
 try{
     const reqInit = {method};
     const headers = {};
     if(body){
-        headers['Content-Type'] = 'application/json'
-        reqInit.body = JSON.stringify(body);
+        if(isFormData){
+            // headers['Content-Type'] = 'multipart/form-data'
+            reqInit.body = body
+        }else{
+            headers['Content-Type'] = 'application/json'
+            reqInit.body = JSON.stringify(body);
+        }
+
     }
     if(hasAuth){
         headers['Authorization'] = 'Bearer '+storageService.get("token");
