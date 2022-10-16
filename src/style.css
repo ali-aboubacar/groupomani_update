@@ -30,7 +30,6 @@ h1,h3,p{
     display:flex;
     height:50px;
     width:100%;
-    background: #FFD7D7;
     border-radius: 6px 6px 0 0;
 }
 .card-header ul{
@@ -58,10 +57,10 @@ h1,h3,p{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #FFD7D7;
     width: 100%;
     border-radius: 0 0 20px 20px ;
 }
+
 /*spinner animation*/
 .pre-loader-wrap {
     display: -webkit-box;
@@ -99,7 +98,7 @@ h1,h3,p{
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #FFD7D7;
+    background: #FD2D01;
     margin: -4px 0 0 -4px;
   }
   .lds-roller div:nth-child(1) {
@@ -167,3 +166,5 @@ h1,h3,p{
     }
   }
   
+
+

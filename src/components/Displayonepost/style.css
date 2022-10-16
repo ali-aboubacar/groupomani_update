@@ -9,9 +9,9 @@
 }
 .card-btn :nth-child(1),.card-btn :nth-child(2){
     width:45%;
-    border-radius: 6px;
-    color: white;
-    background :  #4E5166;
+    border-radius: 17px;
+    color: black;
+    background :  #FFD7D7;
     border:none;
 }
 
@@ -20,5 +20,6 @@
     transition: background-color 2s,linear 1s;
 }
 .card-btn :nth-child(2):hover{
-    filter: brightness(1.85);
+    filter: brightness(1.1);
+    transition:filter 2s, linear 1s;
 }

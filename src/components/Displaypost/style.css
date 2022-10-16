@@ -2,4 +2,13 @@
     width: 85%;
     height: 35px;   
 }
+.likesBtn:hover{
+    color:#FD2D01;
+    cursor:pointer;
+}
 
+.likesBtnActive{
+    color:#FD2D01;
+    width: 85%;
+    height: 35px; 
+}

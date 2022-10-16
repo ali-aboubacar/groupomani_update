@@ -12,14 +12,21 @@ import Loading from '../Loading';
  
 function Displaypost() {
   const [listOfPosts, setListOfPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(()=>{
     setLoading(true)
     postService.getAll().then(res=>{
-      setListOfPosts(res.data);
+      console.log(res.data);
+      setListOfPosts(res.data.listOfPosts);
+      setLikedPosts(
+        res.data.likedPosts.map((like) => {
+          return like.postId;
+        })
+      )
       setTimeout(()=>{
         setLoading(false)
-      },1000) 
+      },500) 
     });
   },[]);
   
@@ -40,6 +47,16 @@ function Displaypost() {
       }
     })
   );
+
+  if (likedPosts.includes(postId)) {
+    setLikedPosts(
+      likedPosts.filter((id) => {
+        return id != postId;
+      })
+    );
+  } else {
+    setLikedPosts([...likedPosts, postId]);
+  }
 };
   return (
     <section className='home-section'>
@@ -60,7 +77,9 @@ function Displaypost() {
               </div>
               </Link>
               <div className='card-footer'>
-              <FaRegThumbsUp className='likesBtn' onClick={()=>{
+              <FaRegThumbsUp className={
+                    likedPosts.includes(post.id) ? "likesBtnActive" : "likesBtn"
+                  } onClick={()=>{
               handleLikes(post.id);
              }}/>
              <span>{post.likesNum}</span>

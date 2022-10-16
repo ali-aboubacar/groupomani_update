@@ -1,7 +1,6 @@
 import './style.css'
 import {useState} from 'react'
-import axios from 'axios'
-import { storageService } from '../../Services/storageService';
+import {useNavigate } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
 import { useEffect } from 'react';
 import { postService } from '../../Services/postService';
@@ -15,6 +14,8 @@ function Sendpost() {
     title:"",
     content:"",
   });
+  
+  const navigate = useNavigate();
 
   useEffect(()=>{
     if(imageFile){
@@ -44,15 +45,11 @@ function Sendpost() {
     formDataToSend.append('content', dataToSend.content);
     formDataToSend.append('file', imageFile);
     
-    const config = {     
-      headers: { 'content-type': 'multipart/form-data',"authorization":"Bearer "+storageService.get('token') }
-  }
   try{
-    // const req = await axios.post("http://localhost:4000/api/posts", formDataToSend, config);
     const req = await postService.create(formDataToSend)
     console.log(req.data);
     setImagePreview(null);
-    e.target.reset();
+    navigate('/displayPost');
   }catch(err){
     console.error(err);
   }

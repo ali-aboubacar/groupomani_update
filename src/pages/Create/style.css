@@ -2,7 +2,7 @@
     width:95%;
     margin-bottom:5%;
     border-radius: 0 6px 6px 0;
-    box-shadow: 10px 5px 5px #4e5166;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .post-component form{
     width: 90%;
@@ -28,13 +28,11 @@
     justify-content: center;
 }
 .post-component input:nth-child(5){
-    background-color: aqua;
-    width: 50%;
-    height: 35px;
+    width:45%;
     border-radius: 17px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: black;
+    background :  #FFD7D7;
+    border:none;
 }
 .post-component textarea{
     width:100%;

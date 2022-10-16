@@ -140,20 +140,33 @@ exports.deletePost = (req, res, next) => {
 };
 //recuperer toute les sauces
 
-exports.getAllPost = (req, res, next) => {
-  Post.findAll({ include: {
-    model: User,
-    attributes:["firstName","lastName"]
-  }, order: [ [ 'createdAt', 'DESC' ]]},)
-    .then((data) => {
-      console.log(JSON.stringify(data, null, 2));
-      return res.status(200).send(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.status(500).send({
-        message:
-          err.message || "Une Erreur est survenue lors de la recuperation du post.",
-      });
-    });
+exports.getAllPost = async (req, res, next) => {
+  try{
+    const listOfPosts = await Post.findAll({ include: {
+      model: User,
+      attributes:["firstName","lastName"]
+    }, order: [ [ 'createdAt', 'DESC' ]]},);
+    console.log(JSON.stringify(listOfPosts, null, 2));
+    const likedPosts = await Like.findAll({ where: { userId: req.auth.userId } });
+    console.log(JSON.stringify(likedPosts, null, 2));
+    return res.status(200).send({likedPosts:likedPosts,listOfPosts:listOfPosts})
+  }catch(err){
+    return res.status(500).json({message: err})
+  }
+
+  // Post.findAll({ include: {
+  //   model: User,
+  //   attributes:["firstName","lastName"]
+  // }, order: [ [ 'createdAt', 'DESC' ]]},)
+  //   .then((data) => {
+  //     console.log(JSON.stringify(data, null, 2));
+  //     return res.status(200).send(data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     return res.status(500).send({
+  //       message:
+  //         err.message || "Une Erreur est survenue lors de la recuperation du post.",
+  //     });
+  //   });
 };

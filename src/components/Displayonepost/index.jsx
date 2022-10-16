@@ -23,11 +23,8 @@ function Displayonepost() {
 
   const deletePost = async (e) =>{
     e.preventDefault();
-    const config = {     
-      headers: { 'content-type': 'multipart/form-data',"authorization":"Bearer "+storageService.get('token') }
-  }
     try{
-      const req = await axios.delete(`http://localhost:4000/api/posts/${id}`,config);
+      const req = await postService.delete(id);
       navigate('/displayPost');
     }catch(err){
       return err
@@ -50,7 +47,7 @@ function Displayonepost() {
       });
       setTimeout(()=>{
         setLoading(false)
-      },1000) 
+      },500) 
     });
   },[id]);
   return (

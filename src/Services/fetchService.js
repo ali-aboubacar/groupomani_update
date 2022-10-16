@@ -17,7 +17,6 @@ try{
         headers['Authorization'] = 'Bearer '+storageService.get("token");
     }
     reqInit.headers = headers ;
-    console.log(reqInit);
     const res= await fetch('http://localhost:4000/api/'+url,reqInit)
     const result = await res.json();
     return {data:result}

@@ -1,8 +1,10 @@
 import './style.css'
 import {useState,useEffect} from 'react'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { storageService } from '../../Services/storageService'
+import {useNavigate } from 'react-router-dom'
+import { postService } from '../../Services/postService'
+
+
 function UpdateForm({post}) {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState();
@@ -11,6 +13,8 @@ function UpdateForm({post}) {
     content:post.content,
   });
   const {id} = useParams();
+  const navigate = useNavigate();
+
   useEffect(()=>{
     if(imageFile){
       const reader = new FileReader();
@@ -44,14 +48,11 @@ const imageChanged = e => {
     if(imageFile){
       formDataToSend.append('file', imageFile);
     }
-    
-    const config = {     
-      headers: { 'content-type': 'multipart/form-data',"authorization":"Bearer "+storageService.get('token') }
-  }
+
       try {
-          const res = await axios.put(`http://localhost:4000/api/posts/${id}`, formDataToSend,config);
+          const res = await postService.update(id,formDataToSend);
           console.log(res.data);
-          e.target.reset();
+          navigate('/displayPost');
       } catch (err) {
           // Handle Error Here
           console.error(err);

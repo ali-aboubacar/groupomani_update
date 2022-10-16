@@ -28,13 +28,11 @@
     justify-content: center;
 }
 .post-component input:nth-child(4){
-    background-color: aqua;
-    width: 50%;
-    height: 35px;
+    width:45%;
     border-radius: 17px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: black;
+    background :  #FFD7D7;
+    border:none;
 }
 .post-component textarea{
     width:100%;

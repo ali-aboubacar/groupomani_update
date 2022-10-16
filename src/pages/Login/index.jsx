@@ -2,7 +2,7 @@ import {useState} from 'react'
 import './style.css'
 import {useNavigate, Link} from 'react-router-dom'
 import { userService } from '../../Services/userService';
-
+import { validEmail, validPassword  } from '../../Services/regex';
 
 // import {Route} from "react-router-dom"
 // import DisplayPic from '../../assets/user-profile.png'
@@ -15,6 +15,8 @@ function LoginForm() {
     email:"",
     password:"",
   });
+  const [emailErr, setEmailErr] = useState(false);
+  const [pwdError, setPwdError] = useState(false);
   const navigate = useNavigate();
   
   const formDataFieldChanged = e => {
@@ -24,6 +26,14 @@ function LoginForm() {
     setDataToSend(formDataTemp);
 }
 
+const validate = async () => {
+  if (!validEmail.test(dataToSend.email)) {
+     setEmailErr(true);
+  }
+  if (!validPassword.test(dataToSend.password)) {
+     setPwdError(true);
+  }
+};
   const loginUser = async (e) =>{
     e.preventDefault();
     try{
@@ -40,7 +50,9 @@ function LoginForm() {
     <div className="login-component">
             <form onSubmit={loginUser}>
             <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged}/>
+            {emailErr && <p>Your email is invalid</p>}
             <input name="password" type="password" placeholder='Password' onChange={formDataFieldChanged}/>
+            {pwdError && <p>Your password is invalid</p>}
             <input type="submit" value="valider" />
             </form>
             <Link to='/signup'>Sign Up</Link>
