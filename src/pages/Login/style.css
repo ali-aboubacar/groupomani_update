@@ -14,20 +14,64 @@
     flex-direction: column;
     align-items: center;
 }
-.login-component input:nth-child(1),
-input:nth-child(2){
+/* .login-component input{
     width:100%;
     height: 30px;
     margin-bottom: 3%;
     border-radius: 15px;
     display: flex;
     justify-content: center;
-}
+} */
 
-.login-component :nth-child(3){
-    width:45%;
+.style-btn{
+    width: 50%;
+    height: 35px;
+    margin-bottom:3%;
+    margin-top:3%;
     border-radius: 17px;
     color: black;
-    background :  #FFD7D7;
-    border:none;
+    background: #FFD7D7;
+    border: none;
+}
+.style-btn:hover{
+    cursor: pointer;
+    filter: brightness(1.1);
+    transition:filter 1s, linear 1s;
+}
+/*----errror mesages----*/
+.regex-err{
+    width: 95%;
+    display: flex;
+    height: 25px;
+    color:#FD2D01;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+  
+
+  .signup-component{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.signup-component form{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.field-input{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 3%;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 }

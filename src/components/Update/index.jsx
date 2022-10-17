@@ -63,11 +63,11 @@ const imageChanged = e => {
     <div className='displaypost-component'>
     <div className="post-component">
             <form encType="multipart/form"  onSubmit={submitData}>
-            <input name="title" type="text" placeholder='entree un titre' onChange={formDataFieldChanged} value={dataToSend.title}/>
-            <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content" value={dataToSend.content}></textarea>
+            <input name="title" type="text" placeholder='entree un titre' onChange={formDataFieldChanged} value={dataToSend.title} className="post-title"/>
+            <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content" value={dataToSend.content} ></textarea>
             <input name="imageFile" type="file" onChange={imageChanged} />
             {imagePreview && <img src={imagePreview} alt="preview de votre selection" />}
-            <input type="submit" value="valider" />
+            <input type="submit" value="valider" className='style-btn'/>
             </form>
         </div>
         </div>

@@ -16,10 +16,12 @@
 }
 
 .card-btn :nth-child(1):hover{
+    cursor: pointer;
     background-color: #FD2D01;
     transition: background-color 2s,linear 1s;
 }
 .card-btn :nth-child(2):hover{
+    cursor: pointer;
     filter: brightness(1.1);
     transition:filter 2s, linear 1s;
 }

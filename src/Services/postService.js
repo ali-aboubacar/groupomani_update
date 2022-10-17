@@ -21,8 +21,8 @@ export const postService= {
         const result = await fetchData('posts/'+id,'GET',null,true)
         return result
     },
-    addLikes: async (PostId)=>{
-        const result = await fetchData('posts/likes','POST',PostId,true)
+    addLikes: async (id)=>{
+        const result = await fetchData('posts/likes/'+id,'GET',null,true)
         return result
     }
 

@@ -62,11 +62,11 @@ function Sendpost() {
       <div className='displaypost-component'>
     <div className="post-component">
             <form encType="multipart/form"  onSubmit={submitData}>
-            <input name="title" type="text" placeholder='post title' onChange={formDataFieldChanged}/>
-            <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content"></textarea>
+            <input name="title" type="text" placeholder='post title' onChange={formDataFieldChanged} className="post-title"/>
+            <textarea name="content" id="" cols="30" rows="10" onChange={formDataFieldChanged} placeholder="enter content" className='post-content'></textarea>
             <input name="imageFile" type="file" onChange={imageChanged}/>
             {imagePreview && <img src={imagePreview} alt="preview de Votre Selection" />}
-            <input type="submit" value="valider" />
+            <input type="submit" value="valider" className='style-btn'/>
             </form>
         </div>
         </div>

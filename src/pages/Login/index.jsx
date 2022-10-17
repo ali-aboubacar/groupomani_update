@@ -40,6 +40,7 @@ const validate = () => {
   }else{
     setPwdError(false);
   }
+  return !errors;
 };
   const loginUser = async (e) =>{
     e.preventDefault();
@@ -59,13 +60,13 @@ const validate = () => {
     <section className='home-section'>
     <div className="login-component">
             <form onSubmit={loginUser}>
-            <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged}/>
-            {emailErr && <p>Your email is invalid</p>}
-            <input name="password" type="password" placeholder='Password' onChange={formDataFieldChanged}/>
-            {pwdError && <p>Your password is invalid</p>}
-            <input type="submit" value="valider" />
+            <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged} className="field-input"/>
+            {emailErr && <p className='regex-err'>Votre email est incorrect</p>}
+            <input name="password" type="password" placeholder='Password' onChange={formDataFieldChanged} className="field-input"/>
+            {pwdError && <p className='regex-err'>Votre mots de passe est incorrect</p>}
+            <input type="submit" value="Connexion" className='style-btn' />
+            <Link to='/signup'>Créer un compte</Link>
             </form>
-            <Link to='/signup'>Sign Up</Link>
         </div>
         </section>
 

@@ -3,9 +3,6 @@ import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { postService } from '../../Services/postService';
 import { FaRegThumbsUp } from "react-icons/fa";
-// import {Route} from "react-router-dom"
-import axios from 'axios'
-import { storageService } from '../../Services/storageService';
 import Sidebar from '../Sidebar';
 import Loading from '../Loading';
 // import DisplayPic from '../../assets/user-profile.png'
@@ -30,9 +27,7 @@ function Displaypost() {
   },[]);
   
   const handleLikes = async (postId) => {
-    const req = await axios.get('http://localhost:4000/api/posts/likes/'+postId,{     
-      headers: {"authorization":"Bearer "+storageService.get('token') }
-  });
+    const req = await postService.addLikes(postId);
    setListOfPosts(
     listOfPosts.map((post) => {
       if (post.id === postId) {
@@ -50,7 +45,7 @@ function Displaypost() {
   if (likedPosts.includes(postId)) {
     setLikedPosts(
       likedPosts.filter((id) => {
-        return id != postId;
+        return id !== postId;
       })
     );
   } else {

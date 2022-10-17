@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+body{
+  font-family: 'Lato', sans-serif;
+}
 
 img {
     object-fit: cover;
@@ -167,4 +171,38 @@ h1,h3,p{
   }
   
 
+
+   /*!----media queries---*/
+
+   @media all and (max-width: 767px) {
+
+    .sidebar-component{
+      width:15%;
+    }
+    .sidebar-divider a{
+        display:flex;
+        justify-content: center;
+    }
+    .icons{
+        width:55%;
+    }
+    .footer{
+        justify-content: center;
+    }
+    .footer a{
+        width:80%;
+    }
+    .logout-icon{
+        width:55%;
+    }
+    .mob-hide{
+        display: none;
+    }
+    .mobile-nav a{
+        width:50%;
+    }
+    .pre-loader-wrap{
+        width: 80%;
+    }
+  }
 

@@ -75,15 +75,15 @@ function SignUpForm() {
     <section className='home-section'>
     <div className="signup-component">
             <form onSubmit={submitData}>
-            <input name="firstName" type="text" placeholder='First Name' onChange={formDataFieldChanged}/>
-            {firstNameErr&&<p>error</p>}
-            <input name="lastName" type="text" placeholder='Last Name' onChange={formDataFieldChanged}/>
-            {lastNameErr && <p>error</p>}
-            <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged}/>
-            {emailErr && <p>Your email is invalid</p>}
-            <input name="password" type="password" placeholder='Password' onChange={formDataFieldChanged}/>
-            {pwdError && <p>Your password is invalid</p>}
-            <input type="submit" value="valider" />
+            <input name="firstName" type="text" placeholder='First Name' onChange={formDataFieldChanged} className="field-input"/>
+            {firstNameErr&&<p className='regex-err'>error</p>}
+            <input name="lastName" type="text" placeholder='Last Name' onChange={formDataFieldChanged} className="field-input"/>
+            {lastNameErr && <p className='regex-err'>error</p>}
+            <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged} className="field-input"/>
+            {emailErr && <p className='regex-err'>Your email is invalid</p>}
+            <input name="password" type="password" placeholder='Password' onChange={formDataFieldChanged} className="field-input"/>
+            {pwdError && <p className='regex-err'>Your password is invalid</p>}
+            <input type="submit" value="valider" className='style-btn'/>
             </form>
         </div>
         </section>
