@@ -38,10 +38,11 @@ function Displayonepost() {
     setLoading(true);
     postService.getOne(id).then(res=>{
       setSinglePost(res.data);
-      console.log(res.data)
       const id = storageService.get("userId");
       const isAdmin = storageService.get("isAdmin")
       setUserDetails({
+        firstName:res.data.user.firstName,
+        lastName:res.data.user.lastName,
         userId:id,
         isAdmin:isAdmin,
       });
@@ -59,6 +60,7 @@ function Displayonepost() {
     <div className='displaypost-component' id='displaypost-id'>   
     <div className='post-card' key={singlePost.id} >
     <div className='card-header'>
+      <h3>{userDetails.firstName} {userDetails.lastName} </h3>
     </div>
     
     <div className='card-content'>

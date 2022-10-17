@@ -26,16 +26,26 @@ function LoginForm() {
     setDataToSend(formDataTemp);
 }
 
-const validate = async () => {
+const validate = () => {
+  let errors = false;
   if (!validEmail.test(dataToSend.email)) {
+    errors = true;
      setEmailErr(true);
+  }else{
+    setEmailErr(false);
   }
   if (!validPassword.test(dataToSend.password)) {
+    errors = true;
      setPwdError(true);
+  }else{
+    setPwdError(false);
   }
 };
   const loginUser = async (e) =>{
     e.preventDefault();
+    if(!validate()){
+      return ;
+    }
     try{
       const res = await userService.login(dataToSend);
       console.log("@@@@@@@@@@",res)

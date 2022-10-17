@@ -19,19 +19,34 @@ function SignUpForm() {
   const navigate = useNavigate();
 
 
-  const validate = async() => {
+  const validate = () => {
+    let errors = false;
     if (!validName.test(dataToSend.lastName)) {
+      console.log(dataToSend.lastName);
+      errors =true;
       setLastNameErr(true);
+   }else{
+    setLastNameErr(false);
    }
     if (!validName.test(dataToSend.firstName)) {
+      errors =true;
       setFirstNameErr(true);
+   }else{
+    setFirstNameErr(false);
    }
     if (!validEmail.test(dataToSend.email)) {
+      errors =true;
        setEmailErr(true);
+    }else{
+      setEmailErr(false);
     }
     if (!validPassword.test(dataToSend.password)) {
+      errors =true;
        setPwdError(true);
+    }else{
+      setPwdError(false);
     }
+    return !errors;
  };
 
   const formDataFieldChanged = e => {
@@ -43,7 +58,10 @@ function SignUpForm() {
 
   const submitData = async (e) => {
     e.preventDefault();
-    validate(dataToSend);
+    if(!validate()){
+      return ;
+    }
+    console.log(validate());
     try{
       const req = await userService.signup(dataToSend)
       console.log(req);

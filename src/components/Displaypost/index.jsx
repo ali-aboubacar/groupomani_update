@@ -17,7 +17,6 @@ function Displaypost() {
   useEffect(()=>{
     setLoading(true)
     postService.getAll().then(res=>{
-      console.log(res.data);
       setListOfPosts(res.data.listOfPosts);
       setLikedPosts(
         res.data.likedPosts.map((like) => {

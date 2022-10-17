@@ -25,28 +25,6 @@ exports.createPost = (req, res, next) => {
       res.status(400).json({ error });
     });
 };
-//recupere une seul sauce
-exports.getOnePost = (req, res, next) => {
-  const id = req.params.id;
-  Post.findOne({ include: {
-    model: User,
-    attributes:["firstName","lastName"]
-  },where:{id:id}})
-    .then((data) => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `Post introuvable id=${id}.`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Une Erreur est survenue lors de la recuperation du Post id=" + id,
-      });
-    });
-};
 
 //modifier une sauce
 exports.modifyPost = (req, res, next) => {
@@ -138,8 +116,40 @@ exports.deletePost = (req, res, next) => {
       res.status(500).json({ error });
     });
 };
-//recuperer toute les sauces
 
+//recupere une seul sauce
+exports.getOnePost = async (req, res, next) => {
+  const id = req.params.id;
+try {
+  const singlePost = await Post.findOne({ include: {
+    model: User,
+    attributes:["firstName","lastName"]
+  },where:{id:id}})
+  console.log(JSON.stringify(singlePost, null, 2));
+  return res.status(200).send(singlePost );
+}catch(err){
+  return res.status(500).json({message: err}) 
+}
+  // Post.findOne({ include: {
+  //   model: User,
+  //   attributes:["firstName","lastName"]
+  // },where:{id:id}})
+  //   .then((data) => {
+  //     if (data) {
+  //       res.send(data);
+  //     } else {
+  //       res.status(404).send({
+  //         message: `Post introuvable id=${id}.`,
+  //       });
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send({
+  //       message: "Une Erreur est survenue lors de la recuperation du Post id=" + id,
+  //     });
+  //   });
+};
+//recuperer toute les sauces
 exports.getAllPost = async (req, res, next) => {
   try{
     const listOfPosts = await Post.findAll({ include: {
