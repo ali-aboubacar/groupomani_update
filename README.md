@@ -1,6 +1,6 @@
 ## Frontend
 
-You will need to have `Nodejs` installed locally on your machine.
+You will need to have `Nodejs` installed locally on your machine. 
 run `npm install` .You can then run the server with `npm start`. the server should run on localhost with default port 3000 . if the server runs on another port for any reason, this is printed to the console when server starts, e.g. Listening on port 3001.
 
 
