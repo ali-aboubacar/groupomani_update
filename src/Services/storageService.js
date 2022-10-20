@@ -1,4 +1,4 @@
-export const key = "groupomania_ab_token"
+const key = "groupomania_ab_token"
 export const storageService = {
     get:(propName)=>{
         let data = window.localStorage.getItem(key)
@@ -18,5 +18,8 @@ export const storageService = {
         }
         data[propName] = newData;
         window.localStorage.setItem(key, JSON.stringify(data))
+    },
+    remove:()=>{
+        window.localStorage.removeItem(key)
     },
 };

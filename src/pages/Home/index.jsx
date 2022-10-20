@@ -4,6 +4,7 @@ import Displayonepost from '../../components/Displayonepost';
 import Login from '../Login'
 import Signup from '../Signup'
 import Create from '../Create'
+import Error from '../Error'
 import React, {useState,useEffect} from 'react'
 // import { userService } from '../../Services/userService';
 import { storageService } from '../../Services/storageService';
@@ -34,6 +35,7 @@ function Home() {
         <Route path="/displayPost" element={ <Displaypost /> } />
         <Route path="/signup" element={ <Signup props={userDetails}/> } />
         <Route path="/create" element={ <Create/> } />
+        <Route path="*" element={ <Error/> } />
       </Routes>
   );
 }

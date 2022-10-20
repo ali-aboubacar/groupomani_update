@@ -130,24 +130,6 @@ try {
 }catch(err){
   return res.status(500).json({message: err}) 
 }
-  // Post.findOne({ include: {
-  //   model: User,
-  //   attributes:["firstName","lastName"]
-  // },where:{id:id}})
-  //   .then((data) => {
-  //     if (data) {
-  //       res.send(data);
-  //     } else {
-  //       res.status(404).send({
-  //         message: `Post introuvable id=${id}.`,
-  //       });
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).send({
-  //       message: "Une Erreur est survenue lors de la recuperation du Post id=" + id,
-  //     });
-  //   });
 };
 //recuperer toute les sauces
 exports.getAllPost = async (req, res, next) => {
@@ -156,27 +138,10 @@ exports.getAllPost = async (req, res, next) => {
       model: User,
       attributes:["firstName","lastName"]
     }, order: [ [ 'createdAt', 'DESC' ]]},);
-    console.log(JSON.stringify(listOfPosts, null, 2));
     const likedPosts = await Like.findAll({ where: { userId: req.auth.userId } });
-    console.log(JSON.stringify(likedPosts, null, 2));
     return res.status(200).send({likedPosts:likedPosts,listOfPosts:listOfPosts})
   }catch(err){
     return res.status(500).json({message: err})
   }
 
-  // Post.findAll({ include: {
-  //   model: User,
-  //   attributes:["firstName","lastName"]
-  // }, order: [ [ 'createdAt', 'DESC' ]]},)
-  //   .then((data) => {
-  //     console.log(JSON.stringify(data, null, 2));
-  //     return res.status(200).send(data);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     return res.status(500).send({
-  //       message:
-  //         err.message || "Une Erreur est survenue lors de la recuperation du post.",
-  //     });
-  //   });
 };
