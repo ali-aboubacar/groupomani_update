@@ -1,5 +1,4 @@
 import {useState} from 'react'
-import './style.css'
 import { useNavigate } from 'react-router-dom';
 import {userService} from '../../Services/userService'
 import { validEmail, validPassword, validName  } from '../../Services/regex';
@@ -75,14 +74,14 @@ function SignUpForm() {
     <section className='home-section'>
     <div className="signup-component">
             <form onSubmit={submitData}>
-            <input name="firstName" type="text" placeholder='First Name' onChange={formDataFieldChanged} className="field-input"/>
-            {firstNameErr&&<p className='regex-err'>error</p>}
-            <input name="lastName" type="text" placeholder='Last Name' onChange={formDataFieldChanged} className="field-input"/>
-            {lastNameErr && <p className='regex-err'>error</p>}
+            <input name="firstName" type="text" placeholder='Prenom' onChange={formDataFieldChanged} className="field-input"/>
+            {firstNameErr&&<p className='regex-err'>le Prenom ne possede pas de charactere speciaux ni de chiffre</p>}
+            <input name="lastName" type="text" placeholder='Nom de famille' onChange={formDataFieldChanged} className="field-input"/>
+            {lastNameErr && <p className='regex-err'>le Nom de famille ne possede pas de charactere speciaux ni de chiffre</p>}
             <input name="email" type="email" placeholder='e-mail' onChange={formDataFieldChanged} className="field-input"/>
-            {emailErr && <p className='regex-err'>Your email is invalid</p>}
+            {emailErr && <p className='regex-err'>Votre email est incorrect</p>}
             <input name="password" type="password" placeholder='Password' onChange={formDataFieldChanged} className="field-input"/>
-            {pwdError && <p className='regex-err'>Your password is invalid</p>}
+            {pwdError && <p className='regex-err'>Votre mots de passe est incorrect</p>}
             <input type="submit" value="valider" className='style-btn'/>
             </form>
         </div>
